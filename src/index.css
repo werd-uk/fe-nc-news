@@ -30,3 +30,27 @@
     background-color: rgb(85, 128, 247);
     color: rgba(254, 254, 254, 1);
 }
+
+.bubble {
+    position: relative;
+    width: 250px;
+    height: 120px;
+    padding: 0px;
+    background: #7cc5fd;
+    -webkit-border-radius: 14px;
+    -moz-border-radius: 14px;
+    border-radius: 14px;
+}
+
+.bubble:after {
+    content: "";
+    position: absolute;
+    border-style: solid;
+    border-width: 11px 20px 11px 0;
+    border-color: transparent #7cc5fd;
+    display: block;
+    width: 0;
+    z-index: 1;
+    left: -20px;
+    top: 78px;
+}
