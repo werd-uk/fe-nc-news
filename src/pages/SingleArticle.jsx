@@ -38,7 +38,7 @@ function SingleArticle() {
                 <div className="order-4 col-span-full">{currentArticle.body}</div>
             </div>
 
-            <CommentSection commentsVisible={commentsVisible} article={id} />
+            <CommentSection commentsVisible={commentsVisible} setCommentsVisible={setCommentsVisible} article={id} />
         </>
     );
 }
