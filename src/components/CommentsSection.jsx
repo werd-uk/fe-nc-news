@@ -7,11 +7,7 @@ function CommentSection({ commentsVisible, setCommentsVisible, article }) {
     const [comments, setComments] = useState([]);
     const [isLoadingComments, setIsLoadingComments] = useState(true);
     const allComments = comments.map((comment) => {
-<<<<<<< HEAD
         return !isLoadingComments ? <Comment comment={comment} count={comment.votes}></Comment> : <></>;
-=======
-        return !isLoadingComments ? <Comment comment={comment}></Comment> : <></>;
->>>>>>> 513d0a797c2ce25e03fd9cb772a822dffe3c8d10
     });
 
     useEffect(() => {
