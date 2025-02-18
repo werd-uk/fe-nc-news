@@ -33,7 +33,7 @@ function SingleArticle() {
                 </div>
                 <div className="order-1 col-span-full text-3xl">{currentArticle.title}</div>
                 <div className="order-3 col-span-full sm:justify-self-end md:justify-self-start">
-                    <VotingButtons type="article" />
+                    <VotingButtons type="article" count={currentArticle.votes} />
                 </div>
                 <div className="order-4 col-span-full">{currentArticle.body}</div>
             </div>
