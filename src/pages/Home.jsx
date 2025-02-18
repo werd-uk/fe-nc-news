@@ -16,7 +16,7 @@ function Home() {
         const order = orderDesc ? "DESC" : "ASC";
         getArticles({ topic, sort_by: sort, order })
             .then((response) => {
-                setArticleList(response.data.rows);
+                setArticleList(response.rows);
                 setIsLoading(false);
             })
             .catch((err) => console.log(err));

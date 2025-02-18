@@ -14,7 +14,7 @@ function App() {
             <main className="bg-white rounded-md text-black p-5 justify-items-center">
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/:id" element={<SingleArticle />} />
+                    <Route path="/articles/:id" element={<SingleArticle />} />
                     <Route path="/*" element={<p>{JSON.stringify(id) || "PAGE NOT FOUND"}</p>} /> {/* 404 to go here */}
                 </Routes>
             </main>
