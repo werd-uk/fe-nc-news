@@ -1,11 +1,24 @@
+import Header from "./components/Header";
+import Home from "./pages/Home";
+import SingleArticle from "./pages/SingleArticle";
+import { BrowserRouter, Routes, Route, useParams } from "react-router";
+
 function App() {
+    const { id } = useParams();
+
     return (
-        <div className="flex-nowrap gap-5 bg-white dark:bg-black min-h-[100dvh] min-w-[100dvw] justify-center p-10">
-            <div className="grid grid-cols-12 gap-1">
-                <header className="flex col-span-full bg-white rounded-md text-black p-5 min-fit">Logo</header>
-                <main className="flex col-span-full bg-white rounded-md text-black p-5 min-fit">Middle</main>
-                <footer className="flex col-span-full bg-white rounded-md text-black p-5 min-fit">Footer</footer>
-            </div>
+        <div className="bg-white dark:bg-black justify-center p-3">
+            <Routes>
+                <Route path="/*" element={<Header />}></Route>
+            </Routes>
+            <main className="bg-white rounded-md text-black p-5 justify-items-center">
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/:id" element={<SingleArticle />} />
+                    <Route path="/*" element={<p>{JSON.stringify(id) || "PAGE NOT FOUND"}</p>} /> {/* 404 to go here */}
+                </Routes>
+            </main>
+            <footer className=" bg-white rounded-md text-black p-5 ">Footer</footer>
         </div>
     );
 }
