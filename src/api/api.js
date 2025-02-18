@@ -28,3 +28,13 @@ export const getComments = (article_id) => {
         })
         .catch((err) => console.log(err));
 };
+
+export const patchVote = (object, id) => {
+    return ncApi
+        .patch(`/${object}s/${id}`)
+        .send({ inc_votes: 1 })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((err) => console.log(err));
+};
