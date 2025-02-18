@@ -5,6 +5,8 @@
 }
 
 .default-button {
+    display: flex;
+    align-items: center;
     border-radius: 0.25rem;
     border-width: 1px;
     border-color: currentColor;
@@ -15,12 +17,16 @@
     padding-bottom: 0.25rem;
     font-weight: 400;
     text-transform: none;
-    color: rgb(168, 85, 247);
+    color: rgb(85, 128, 247);
     opacity: 1;
     box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 3px 0 rgb(0, 0, 0, 0.1), 0 1px 2px -1px rgb(0, 0, 0, 0.1);
 }
 
+.default-button > svg {
+    margin-left: 2px;
+}
+
 .current-sort-button {
-    background-color: rgb(168, 85, 247);
+    background-color: rgb(85, 128, 247);
     color: rgba(254, 254, 254, 1);
 }

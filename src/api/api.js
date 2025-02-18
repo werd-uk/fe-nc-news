@@ -3,6 +3,7 @@ import axios from "axios";
 const ncApi = axios.create({ baseURL: "https://werd-nc-news.onrender.com/api", headers: { "Content-Type": "application/json" } });
 
 export const getArticles = (query) => {
+    console.log(JSON.stringify(query));
     return ncApi
         .get("/articles", { params: query })
         .then((response) => {

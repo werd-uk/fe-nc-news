@@ -3,7 +3,7 @@ import PlaceholderCard from "./PlaceholderCard";
 
 function ArticleGrid({ articleList, isLoading }) {
     const articleCards = articleList.map((article) => {
-        return isLoading ? <PlaceholderCard /> : <ArticleCard key={article.article_id} article={article} />;
+        return isLoading ? <PlaceholderCard key={article.article_id} /> : <ArticleCard key={article.article_id} article={article} />;
     });
 
     return (
