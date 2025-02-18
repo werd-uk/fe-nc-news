@@ -27,7 +27,7 @@ function Home() {
                 <h1 className="text-2xl">Articles</h1>
 
                 <button
-                    className="default-button"
+                    className={sort === "comment_count" ? "default-button current-sort-button" : "default-button"}
                     onClick={() => {
                         setSort("comment_count");
                         setOrderDesc(!orderDesc);
@@ -35,7 +35,7 @@ function Home() {
                     Chatty
                 </button>
                 <button
-                    className="default-button"
+                    className={sort === "votes" ? "default-button current-sort-button" : "default-button"}
                     onClick={() => {
                         setSort("votes");
                         setOrderDesc(!orderDesc);
@@ -43,7 +43,7 @@ function Home() {
                     Popular
                 </button>
                 <button
-                    className="default-button"
+                    className={sort === "created_at" ? "default-button current-sort-button" : "default-button"}
                     onClick={() => {
                         setSort("created_at");
                         setOrderDesc(!orderDesc);
