@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { getArticle } from "../api/api";
 import { getAltTag } from "../api/pexels";
 import VotingButtons from "../components/VotingButtons";
-import CommentSection from "../components/CommentsSection";
+import CommentSection from "../components/comments/CommentsSection";
 
 function SingleArticle() {
     const { id } = useParams();

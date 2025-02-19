@@ -1,5 +1,5 @@
 import { useState } from "react";
-import VotingButtons from "./VotingButtons";
+import VotingButtons from "../VotingButtons";
 
 function Comment({ comment }) {
     const [commentVoteCount, setCommentVoteCount] = useState(0);
