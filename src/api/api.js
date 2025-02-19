@@ -24,7 +24,7 @@ export const getComments = (article_id) => {
     return ncApi
         .get(`/articles/${article_id}/comments`)
         .then((response) => {
-            return response.data;
+            return response.data.comments;
         })
         .catch((err) => console.log(err));
 };
