@@ -30,7 +30,7 @@ function CommentSection({ commentsVisible, setCommentsVisible, article }) {
                 Hide Comments
             </button>
             <h2 className="my-5 text-xl">Comments</h2>
-            <NewComment comments={comments} setComments={setComments} />
+            <NewComment comments={comments} setComments={setComments}></NewComment>
             {allComments}
         </>
     ) : (
