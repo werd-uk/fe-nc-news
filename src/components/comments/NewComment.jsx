@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { getComments, postCommentOnArticle } from "../../api/api";
+import LoadingSpinner from "../../assets/Spinner";
 import Notice from "../Notice";
 
 function NewComment({ comments, setComments }) {
@@ -11,23 +12,23 @@ function NewComment({ comments, setComments }) {
     const [newCommentLoading, setNewCommentLoading] = useState(false);
     const { id } = useParams();
 
-    useEffect(() => {
-        if (newCommentLoading) {
-            getComments(id)
-                .then((response) => {
-                    setNewCommentLoading(false);
-                    setComments(response);
-                    setInputNotice({ visible: true, msg: "Posted!", level: "success" });
-                })
-                .then(() => {
-                    setTimeout(() => {
-                        setInputNotice({ visible: false });
-                    }, 2000);
-                })
-                .catch((err) => console.log(err));
-        }
+    const fecthLatestComments = (article_id) => {
+        return getComments(article_id)
+            .then((response) => {
+                setComments(response);
+                setInputNotice({ visible: true, msg: "Posted!", level: "success" });
+            })
+            .then(() => {
+                setNewCommentLoading(false);
+                setTimeout(() => {
+                    setInputNotice({ visible: false });
+                }, 2000);
+            })
+            .catch((err) => console.log(err));
+    };
 
-        return () => {};
+    useEffect(() => {
+        fecthLatestComments(id);
     }, [newCommentLoading]);
 
     return (
@@ -36,7 +37,6 @@ function NewComment({ comments, setComments }) {
                 onSubmit={(e) => {
                     e.preventDefault();
                     setNewCommentLoading(true);
-                    setInputNotice({ visible: true, msg: "Loading...", level: "notice" });
                     postCommentOnArticle(currentUser, id, tempCommentText)
                         .then(() => {
                             setTempCommentText("");
@@ -77,11 +77,12 @@ function NewComment({ comments, setComments }) {
                             required></textarea>
                     </div>
                     <div className="flex items-center justify-end px-3 py-2 border-t dark:border-gray-600 border-gray-200 gap-2">
-                        {inputNotice.visible ? <Notice message={inputNotice.msg} level={inputNotice.level} loading={newCommentLoading} /> : null}
+                        {inputNotice.visible ? <Notice message={inputNotice.msg} level={inputNotice.level} /> : null}
                         <button
                             type="submit"
                             className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
                             Post comment as {currentUser}
+                            {newCommentLoading ? <LoadingSpinner /> : null}
                         </button>
                     </div>
                 </div>

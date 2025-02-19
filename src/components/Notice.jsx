@@ -1,6 +1,4 @@
-import LoadingSpinner from "../assets/Spinner";
-
-function Notice({ message, level = "notice", loading = false }) {
+function Notice({ message, level = "notice" }) {
     const severity = {
         alert: "text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400",
         notice: "text-amber-800 bg-amber-50 dark:bg-gray-800 dark:text-amber-400",
@@ -10,7 +8,6 @@ function Notice({ message, level = "notice", loading = false }) {
     return (
         <>
             <div className={`flex ${severity[level]} p-2 text-sm rounded-lg gap-2`} role="alert">
-                {loading ? <LoadingSpinner /> : null}
                 <span className="font-medium">{message}</span>
             </div>
         </>
