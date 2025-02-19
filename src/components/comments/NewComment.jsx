@@ -1,22 +1,28 @@
 import { useState } from "react";
 import { useParams } from "react-router";
 import { postCommentOnArticle } from "../../api/api";
+import Notice from "../Notice";
 
-function NewComment() {
+function NewComment({ comments, setComments }) {
     const [tempCommentText, setTempCommentText] = useState("");
     const [keyPress, setKeyPress] = useState(null);
     const [currentUser, setCurrentUser] = useState("weegembump");
-    const [inputNotice, setInputNotice] = useState({ visible: false, type: "notice", msg: "" });
+    const [inputNotice, setInputNotice] = useState({ visible: false, level: "notice", msg: "", loading: false });
     const { id } = useParams();
+
     return (
         <>
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
+                    setInputNotice({ visible: true, msg: "Loading...", level: "notice", loading: true });
                     postCommentOnArticle(currentUser, id, tempCommentText)
                         .then((response) => {
                             setTempCommentText("");
-                            setInputNotice({ visible: false, msg: "" });
+                            setInputNotice({ visible: true, msg: "Posted!", level: "success" });
+                            setTimeout(() => {
+                                setInputNotice({ visible: false });
+                            }, 1000);
                         })
                         .catch((err) => {
                             setInputNotice({ visible: true, msg: `${err.response.status}: ${err.response.data.detail}` });
@@ -41,20 +47,16 @@ function NewComment() {
                             }}
                             onChange={(e) => {
                                 if (/[a-zA-Z0-9\t\n ./<>?;:"'`!@#$%&()\[\]{}_+=|\\-]/.test(keyPress)) {
-                                    setInputNotice({ visible: false, msg: "" });
+                                    setInputNotice({ visible: false, level: "", msg: "" });
                                     setTempCommentText(e.target.value);
                                 } else {
-                                    setInputNotice({ visible: true, msg: "Character not allowed!" });
+                                    setInputNotice({ visible: true, level: "notice", msg: "Character not allowed!" });
                                 }
                             }}
                             required></textarea>
                     </div>
                     <div className="flex items-center justify-end px-3 py-2 border-t dark:border-gray-600 border-gray-200 gap-2">
-                        {inputNotice.visible ? (
-                            <div className="p-2 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                                <span className="font-medium">{inputNotice.msg}</span>
-                            </div>
-                        ) : null}
+                        {inputNotice.visible ? <Notice message={inputNotice.msg} level={inputNotice.level} loading={inputNotice.loading} /> : null}
                         <button
                             type="submit"
                             className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
