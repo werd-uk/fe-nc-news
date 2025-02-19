@@ -51,6 +51,9 @@ function NewComment({ comments, setComments }) {
                                     setTempCommentText(e.target.value);
                                 } else {
                                     setInputNotice({ visible: true, level: "notice", msg: "Character not allowed!" });
+                                    setTimeout(() => {
+                                        setInputNotice({ visible: false });
+                                    }, 2000);
                                 }
                             }}
                             required></textarea>
