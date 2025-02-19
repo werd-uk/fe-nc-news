@@ -16,7 +16,6 @@ function NewComment({ comments, setComments }) {
         return getComments(article_id)
             .then((response) => {
                 setComments(response);
-                setInputNotice({ visible: true, msg: "Posted!", level: "success" });
             })
             .then(() => {
                 setNewCommentLoading(false);
@@ -24,7 +23,9 @@ function NewComment({ comments, setComments }) {
                     setInputNotice({ visible: false });
                 }, 2000);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                return Promise.reject(err);
+            });
     };
 
     useEffect(() => {
@@ -39,6 +40,7 @@ function NewComment({ comments, setComments }) {
                     setNewCommentLoading(true);
                     postCommentOnArticle(currentUser, id, tempCommentText)
                         .then(() => {
+                            setInputNotice({ visible: true, msg: "Posted!", level: "success" });
                             setTempCommentText("");
                         })
 
