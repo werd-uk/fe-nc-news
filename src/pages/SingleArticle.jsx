@@ -9,13 +9,11 @@ function SingleArticle() {
 
     const [commentsVisible, setCommentsVisible] = useState(false);
     const [currentArticle, setCurrentArticle] = useState({});
-    const [articleVotes, setArticleVotes] = useState(0);
 
     useEffect(() => {
         getArticle(id)
             .then((response) => {
                 setCurrentArticle(response);
-                setArticleVotes(response.votes);
             })
             .catch((err) => console.log(response));
     }, []);
@@ -35,7 +33,7 @@ function SingleArticle() {
                 </div>
                 <div className="order-1 col-span-full text-3xl">{currentArticle.title}</div>
                 <div className="order-3 col-span-full sm:justify-self-end md:justify-self-start">
-                    <VotingButtons type="article" id={currentArticle.article_id} initCount={currentArticle.votes} setVotes={setArticleVotes} votes={articleVotes} />
+                    <VotingButtons type="article" count={currentArticle.votes} />
                 </div>
                 <div className="order-4 col-span-full">{currentArticle.body}</div>
             </div>
