@@ -6,12 +6,12 @@ function Header() {
         <>
             <Link to="/">
                 <header className="flex col-span-full bg-white rounded-md text-black p-2 mb-2 justify-center">
-                    <p className="flex flex-nowrap text-3xl items-center">
+                    <h1 className="flex flex-nowrap text-3xl items-center">
                         <span className="pe-1">
                             <Skull />
                         </span>
                         Dread-it
-                    </p>
+                    </h1>
                 </header>
             </Link>
         </>

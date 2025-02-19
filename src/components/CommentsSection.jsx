@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { getComments } from "../api/api";
 import Comment from "./Comment";
-import VotingButtons from "./VotingButtons";
 
 function CommentSection({ commentsVisible, setCommentsVisible, article }) {
     const [comments, setComments] = useState([]);
@@ -29,7 +28,7 @@ function CommentSection({ commentsVisible, setCommentsVisible, article }) {
             <button className="mt-5 default-button" onClick={() => setCommentsVisible(!commentsVisible)}>
                 Hide Comments
             </button>
-            <h1 className="mt-5">Comments</h1>
+            <h2 className="mt-5">Comments</h2>
             {allComments}
         </>
     ) : (

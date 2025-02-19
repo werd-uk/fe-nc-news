@@ -34,7 +34,9 @@ function SingleArticle() {
                     <div className="order-2 lg:col-span-1 md:col-span-2 col-span-full aspect-video">
                         <img className="object-cover rounded-lg" src={currentArticle.article_img_url} />
                     </div>
-                    <div className="order-1 col-span-full text-3xl">{currentArticle.title}</div>
+                    <div className="order-1 col-span-full text-3xl">
+                        <h2>{currentArticle.title}</h2>
+                    </div>
                     <div className="order-3 col-span-full sm:justify-self-end md:justify-self-start">
                         <VotingButtons type="article" id={currentArticle.article_id} initCount={currentArticle.votes} setVotes={setArticleVotes} votes={articleVotes} />
                     </div>
