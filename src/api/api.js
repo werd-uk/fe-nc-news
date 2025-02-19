@@ -37,3 +37,14 @@ export const patchVote = (object, id, number) => {
         })
         .catch((err) => console.log(err));
 };
+
+export const postCommentOnArticle = (currentUser, article_id, content) => {
+    return ncApi
+        .post(`/articles/${article_id}/comments`, { username: currentUser, body: content })
+        .then((response) => {
+            return response;
+        })
+        .catch((err) => {
+            return Promise.reject(err);
+        });
+};
