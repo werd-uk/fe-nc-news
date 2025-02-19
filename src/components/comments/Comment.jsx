@@ -1,10 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import VotingButtons from "../VotingButtons";
+import { deleteComment } from "../../api/api";
 import { Trash } from "@phosphor-icons/react";
 
 function Comment({ comment }) {
     const [commentVoteCount, setCommentVoteCount] = useState(0);
     const [commentHidden, setCommentHidden] = useState(false);
+
+    useEffect(() => {
+        if (commentHidden) {
+            deleteComment(comment.comment_id).then((confirmation) => {
+                if (confirmation === 204) {
+                    console.log("comment deleted");
+                }
+            });
+        }
+    }, [commentHidden]);
 
     return (
         <article className={commentHidden ? "fade-out" : "block"}>

@@ -48,3 +48,9 @@ export const postCommentOnArticle = (currentUser, article_id, content) => {
             return Promise.reject(err);
         });
 };
+
+export const deleteComment = (comment_id) => {
+    return ncApi.delete(`/comments/${comment_id}`).then((response) => {
+        return response.status;
+    });
+};
