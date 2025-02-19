@@ -29,10 +29,9 @@ export const getComments = (article_id) => {
         .catch((err) => console.log(err));
 };
 
-export const patchVote = (object, id) => {
+export const patchVote = (object, id, number) => {
     return ncApi
-        .patch(`/${object}s/${id}`)
-        .send({ inc_votes: 1 })
+        .patch(`/${object}s/${id}`, { int_votes: number })
         .then((response) => {
             return response.data;
         })
