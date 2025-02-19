@@ -1,7 +1,7 @@
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import SingleArticle from "./pages/SingleArticle";
-import { BrowserRouter, Routes, Route, useParams } from "react-router";
+import { Routes, Route, useParams } from "react-router";
 
 function App() {
     const { id } = useParams();
@@ -18,6 +18,7 @@ function App() {
                     <Route path="/*" element={<p>{JSON.stringify(id) || "PAGE NOT FOUND"}</p>} /> {/* 404 to go here */}
                 </Routes>
             </main>
+
             <footer className=" bg-white rounded-md text-black p-5 ">Footer</footer>
         </div>
     );

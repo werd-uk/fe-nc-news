@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserAccount } from "../contexts/UserAccount";
 import { useParams } from "react-router";
 import { getComments, postCommentOnArticle } from "../../api/api";
 import LoadingSpinner from "../../assets/Spinner";
 import Notice from "../Notice";
 
 function NewComment({ comments, setComments }) {
+    const { loggedInUser } = useContext(UserAccount);
     const [tempCommentText, setTempCommentText] = useState("");
     const [isCommentValid, setIsCommentValid] = useState(false);
-    const [currentUser, setCurrentUser] = useState("weegembump");
+    const [currentUser, setCurrentUser] = useState("");
     const [inputNotice, setInputNotice] = useState({ visible: false, level: "notice", msg: "" });
     const [newCommentLoading, setNewCommentLoading] = useState(false);
     const { id } = useParams();
@@ -27,6 +29,10 @@ function NewComment({ comments, setComments }) {
                 return Promise.reject(err);
             });
     };
+
+    useEffect(() => {
+        setCurrentUser(loggedInUser.username);
+    }, [loggedInUser]);
 
     useEffect(() => {
         fecthLatestComments(id);

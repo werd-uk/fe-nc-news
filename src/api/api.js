@@ -54,3 +54,9 @@ export const deleteComment = (comment_id) => {
         return response.status;
     });
 };
+
+export const getUsers = () => {
+    return ncApi.get("/users").then((response) => {
+        return response.data.users;
+    });
+};
