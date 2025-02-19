@@ -24,7 +24,7 @@ export const getComments = (article_id) => {
     return ncApi
         .get(`/articles/${article_id}/comments`)
         .then((response) => {
-            return response.data;
+            return response.data.comments;
         })
         .catch((err) => console.log(err));
 };
@@ -36,4 +36,15 @@ export const patchVote = (object, id, number) => {
             return response.data;
         })
         .catch((err) => console.log(err));
+};
+
+export const postCommentOnArticle = (currentUser, article_id, content) => {
+    return ncApi
+        .post(`/articles/${article_id}/comments`, { username: currentUser, body: content })
+        .then((response) => {
+            return response;
+        })
+        .catch((err) => {
+            return Promise.reject(err);
+        });
 };
