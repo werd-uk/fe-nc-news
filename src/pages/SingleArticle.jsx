@@ -34,7 +34,7 @@ function SingleArticle() {
                     <img className="object-cover rounded-lg" src={currentArticle.article_img_url} />
                 </div>
                 <div className="order-1 col-span-full text-3xl">{currentArticle.title}</div>
-                <div className="order-3 col-span-full sm:justify-self-end md:justify-self-start">
+                <div className="order-3 md:col-span-full md:justify-self-start justify-self-end">
                     <VotingButtons type="article" id={currentArticle.article_id} initCount={currentArticle.votes} setVotes={setArticleVotes} votes={articleVotes} />
                 </div>
                 <div className="order-4 col-span-full">{currentArticle.body}</div>
