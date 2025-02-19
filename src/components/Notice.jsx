@@ -1,7 +1,6 @@
 import LoadingSpinner from "../assets/Spinner";
 
-function Notice({ message, level = "notice", loading }) {
-    console.log(message, loading);
+function Notice({ message, level = "notice", loading = false }) {
     const severity = {
         alert: "text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400",
         notice: "text-amber-800 bg-amber-50 dark:bg-gray-800 dark:text-amber-400",
