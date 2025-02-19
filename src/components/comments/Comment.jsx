@@ -26,7 +26,8 @@ function Comment({ comment }) {
                         onClick={() => {
                             setCommentHidden(true);
                         }}
-                        className="bg-white/20 rounded-md hover:bg-white/50">
+                        className="bg-white/20 rounded-md hover:bg-white/50"
+                        aria-label="delete button">
                         <Trash size={18} className="m-1" />
                     </button>
                 </div>
