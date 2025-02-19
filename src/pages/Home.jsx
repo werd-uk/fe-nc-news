@@ -25,7 +25,7 @@ function Home() {
     return (
         <div>
             <div className="flex flex-nowrap gap-5 mb-5 items-center">
-                <h1 className="text-2xl">Articles</h1>
+                <h2 className="text-2xl">Articles</h2>
                 <button
                     className={sort === "comment_count" ? "default-button current-sort-button" : "default-button"}
                     onClick={() => {
