@@ -1,6 +1,6 @@
 import { Link } from "react-router";
-
 import { Skull } from "@phosphor-icons/react";
+
 function Header() {
     return (
         <>

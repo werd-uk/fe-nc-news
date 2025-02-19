@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getArticle } from "../api/api";
+import { getAltTag } from "../api/pexels";
 import VotingButtons from "../components/VotingButtons";
 import CommentSection from "../components/CommentsSection";
 
@@ -10,12 +11,24 @@ function SingleArticle() {
     const [commentsVisible, setCommentsVisible] = useState(false);
     const [currentArticle, setCurrentArticle] = useState({});
     const [articleVotes, setArticleVotes] = useState(0);
+    const [imageAltTag, setImageAltTag] = useState("");
 
     useEffect(() => {
         getArticle(id)
             .then((response) => {
                 setCurrentArticle(response);
                 setArticleVotes(response.votes);
+
+                return response.article_img_url;
+            })
+            .then((imageUrl) => {
+                getAltTag(imageUrl)
+                    .then((response) => {
+                        setImageAltTag(response.alt);
+                    })
+                    .catch(() => {
+                        setImageAltTag("Unable to retrieve Alt Tag");
+                    });
             })
             .catch((err) => console.log(response));
     }, []);
@@ -31,8 +44,11 @@ function SingleArticle() {
                             <button className="default-button">{new Date(currentArticle.created_at).toLocaleDateString("en-GB")}</button>
                         </div>
                     </div>
-                    <div className="order-2 lg:col-span-1 md:col-span-2 col-span-full aspect-video">
-                        <img className="object-cover rounded-lg" src={currentArticle.article_img_url} />
+                    <div className="bg-gray-300 p-2 rounded-sm order-2 lg:col-span-1 md:col-span-2 col-span-full aspect-video">
+                        <figure>
+                            <img className="object-cover rounded-lg pb-2" src={currentArticle.article_img_url} alt={imageAltTag} />
+                            <figcaption className="text-sm">{imageAltTag}</figcaption>
+                        </figure>
                     </div>
                     <div className="order-1 col-span-full text-3xl">
                         <h2>{currentArticle.title}</h2>
