@@ -21,20 +21,30 @@ function VotingButtons({ type, initCount, id, votes, setVotes }) {
     return (
         <div key={id} className="flex bg-gray-400 rounded-sm max-w-max">
             <span className="flex gap-2 px-2">
-                <button className="hover:bg-red-500/20 hover:border-1 hover:border-red-500/50 rounded-sm min-w-7 justify-items-center" onClick={() => amendVote(-1)}>
+                <button
+                    aria-label={`down vote ${type} button`}
+                    className="hover:bg-red-500/20 hover:border-1 hover:border-red-500/50 rounded-sm min-w-7 justify-items-center"
+                    onClick={() => amendVote(-1)}>
                     <Skull className="rotate-180" color="#bc0000" weight="duotone" size={23} />
+                    <span className="hidden">{`Down vote ${type}`}</span>
                 </button>
                 <div className="w-9 h-10 p-2 rounded-sm">
                     {updatingVotes ? (
                         <LoadingSpinner className="self-center" />
                     ) : (
                         <div>
-                            <p className="text-xl text-center">{votes}</p>
+                            <p className="text-xl text-center" aria-label="number of votes">
+                                {votes}
+                            </p>
                         </div>
                     )}
                 </div>
-                <button className=" hover:bg-green-500/20 hover:border-1 hover:border-green-800/50 rounded-sm min-w-7 justify-items-center" onClick={() => amendVote(1)}>
+                <button
+                    aria-label={`down vote ${type} button`}
+                    className=" hover:bg-green-500/20 hover:border-1 hover:border-green-800/50 rounded-sm min-w-7 justify-items-center"
+                    onClick={() => amendVote(1)}>
                     <Skull color="#015607" weight="duotone" size={23} />
+                    <span className="hidden">{`Up vote ${type}`}</span>
                 </button>
             </span>
         </div>
