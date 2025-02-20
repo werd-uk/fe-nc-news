@@ -9,18 +9,16 @@ function App() {
     const { id } = useParams();
 
     return (
-        <div className="bg-white dark:bg-black justify-center p-3">
+        <div className="bg-white dark:bg-gray-500 justify-center p-3 h-fit">
             <Routes>
                 <Route path="*" element={<Header />}></Route>
             </Routes>
-            <main className="bg-white rounded-md text-black p-5 justify-items-center">
+            <main className="bg-white rounded-md text-black justify-items-center mb-2">
                 <Routes>
                     <Route path="/articles">
                         <Route path=":id" element={<SingleArticle />} />
-                        <Route path="*" element={<NotFound />} />
                     </Route>
                     <Route path="/topics/:topic_name" element={<Topics />} />
-
                     <Route path="/">
                         <Route index element={<Home />} />
                         <Route path="/*" element={<NotFound />} />

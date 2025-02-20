@@ -12,6 +12,7 @@ function SingleArticle() {
     const { id } = useParams();
 
     const [commentsVisible, setCommentsVisible] = useState(false);
+    const [isLoadingArticle, setIsLoadingArticle] = useState(true);
     const [notFound, setNotFound] = useState(false);
     const [currentArticle, setCurrentArticle] = useState({});
     const [articleVotes, setArticleVotes] = useState(0);
@@ -19,11 +20,12 @@ function SingleArticle() {
     const [articleAuthor, setArticleAuthor] = useState({});
 
     useEffect(() => {
+        setIsLoadingArticle(true);
         getArticle(id)
             .then((response) => {
                 setCurrentArticle(response);
                 setArticleVotes(response.votes);
-
+                setIsLoadingArticle(false);
                 return response;
             })
             .then((response) => {
@@ -44,17 +46,18 @@ function SingleArticle() {
 
             .catch((err) => {
                 if (err.status === 404) {
+                    setIsLoadingArticle(false);
                     setNotFound(true);
                 }
             });
     }, []);
 
-    return !notFound ? (
+    return !notFound && !isLoadingArticle ? (
         <>
-            <article className="max-w-[1000px]">
+            <article className="max-w-[1000px] pt-5 ">
                 <div className="grid bg-gray-200 grid-cols-4 w-full gap-2">
                     <div className="col-span-full">
-                        <div className="flex flex-wrap p-5 gap-1 bg-gray-300 border-b-1 border-gray-400">
+                        <div className="flex flex-wrap p-5 gap-1 bg-gray-300 border-b-2 border-gray-400">
                             <div className="flex grow gap-2">
                                 <button className="default-button max-w-fit max-h-fit flex-none">
                                     <Tag weight="duotone" className="me-2" />
@@ -100,7 +103,7 @@ function SingleArticle() {
                 <CommentSection commentsVisible={commentsVisible} setCommentsVisible={setCommentsVisible} article={id} />
             </article>
         </>
-    ) : (
+    ) : isLoadingArticle ? null : (
         <NotFound objectType="Article"></NotFound>
     );
 }
