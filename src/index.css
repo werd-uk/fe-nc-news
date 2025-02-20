@@ -27,6 +27,14 @@
     margin-left: 2px;
 }
 
+.topic-button {
+    color: red;
+}
+.current-topic-button {
+    background-color: red;
+    color: rgba(254, 254, 254, 1);
+}
+
 .current-sort-button {
     background-color: rgb(0, 63, 235);
     color: rgba(254, 254, 254, 1);

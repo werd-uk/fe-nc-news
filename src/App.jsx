@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import Home from "./pages/Home";
+import Topics from "./pages/Topics";
 import SingleArticle from "./pages/SingleArticle";
 import { Routes, Route, useParams } from "react-router";
 
@@ -15,6 +16,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/articles/:id" element={<SingleArticle />} />
+                    <Route path="/topics/:topic_name" element={<Topics />} />
                     <Route path="/*" element={<p>{JSON.stringify(id) || "PAGE NOT FOUND"}</p>} /> {/* 404 to go here */}
                 </Routes>
             </main>
