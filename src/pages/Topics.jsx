@@ -1,5 +1,5 @@
 import ArticleGrid from "../components/ArticleGrid";
-import { TopicSelector } from "../components/TopicSelect";
+import { NotFound } from "./errors/ErrorPages";
 import { getArticles, getTopics } from "../api/api";
 import { ArrowDown, ArrowUp } from "@phosphor-icons/react";
 import { useState, useEffect } from "react";
@@ -11,7 +11,6 @@ function Topics() {
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
     const [topic, setTopic] = useState([]);
-    const [topicList, setTopicList] = useState([]);
     const [sort, setSort] = useState("created_at");
     const [orderDesc, setOrderDesc] = useState(false);
 
@@ -26,25 +25,14 @@ function Topics() {
             })
             .catch((err) => {
                 if (err.status === 404) {
+                    setIsLoading(false);
+                    setIsError(true);
                 }
             });
     }, [sort, orderDesc, topic, topic_name]);
 
-    useEffect(() => {
-        getTopics().then((response) => {
-            const topicList = response.data.map((topic) => {
-                return topic;
-            });
-            setTopicList(topicList);
-        });
-    }, []);
-
-    return articleList.length > 0 ? (
-        <div>
-            <div className="flex flex-nowrap gap-5 mb-5 items-center">
-                <h2 className="text-2xl">Topics</h2>
-                <TopicSelector key={topicList.slug} topicList={topicList} topic={topic} setTopic={setTopic} />
-            </div>
+    return articleList.length > 0 && !isError ? (
+        <div className="p-5">
             <div className="flex flex-nowrap gap-5 mb-5 items-center">
                 <h3>Sort articles:</h3>
                 <button
@@ -77,8 +65,10 @@ function Topics() {
             </div>
             <ArticleGrid articleList={articleList} isLoading={isLoading} />
         </div>
+    ) : !isLoading ? (
+        <NotFound objectType={`(Topic "${topic_name}")`} />
     ) : (
-        <>Not Found</>
+        <div className="p-5">Loading...</div>
     );
 }
 export default Topics;

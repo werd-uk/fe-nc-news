@@ -13,7 +13,7 @@ function Comment({ comment }) {
         if (commentHidden) {
             deleteComment(comment.comment_id).then((confirmation) => {
                 if (confirmation === 204) {
-                    console.log("comment deleted");
+                    ///do something with this later
                 }
             });
         }

@@ -23,7 +23,7 @@ function Home() {
     }, [sort, orderDesc, topic]);
 
     return (
-        <div>
+        <div className="p-5">
             <div className="flex flex-nowrap gap-5 mb-5 items-center">
                 <h2 className="text-2xl">Articles</h2>
                 <button

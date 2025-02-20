@@ -1,28 +1,31 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getArticle } from "../api/api";
 import { getAltTag } from "../api/pexels";
 import VotingButtons from "../components/VotingButtons";
-import { UserCircle, Tag, Calendar } from "@phosphor-icons/react";
+import { Tag, Calendar } from "@phosphor-icons/react";
+import { NotFound } from "./errors/ErrorPages";
 import CommentSection from "../components/comments/CommentsSection";
-import { UserAccount } from "../components/contexts/UserAccount";
 import { getUser } from "../api/api";
 
 function SingleArticle() {
     const { id } = useParams();
 
     const [commentsVisible, setCommentsVisible] = useState(false);
+    const [isLoadingArticle, setIsLoadingArticle] = useState(true);
+    const [notFound, setNotFound] = useState(false);
     const [currentArticle, setCurrentArticle] = useState({});
     const [articleVotes, setArticleVotes] = useState(0);
     const [imageAltTag, setImageAltTag] = useState("");
     const [articleAuthor, setArticleAuthor] = useState({});
 
     useEffect(() => {
+        setIsLoadingArticle(true);
         getArticle(id)
             .then((response) => {
                 setCurrentArticle(response);
                 setArticleVotes(response.votes);
-
+                setIsLoadingArticle(false);
                 return response;
             })
             .then((response) => {
@@ -41,15 +44,20 @@ function SingleArticle() {
                 });
             })
 
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                if (err.status === 404) {
+                    setIsLoadingArticle(false);
+                    setNotFound(true);
+                }
+            });
     }, []);
 
-    return (
+    return !notFound && !isLoadingArticle ? (
         <>
-            <article className="max-w-[1000px]">
+            <article className="max-w-[1000px] pt-5 ">
                 <div className="grid bg-gray-200 grid-cols-4 w-full gap-2">
                     <div className="col-span-full">
-                        <div className="flex flex-wrap p-5 gap-1 bg-gray-300 border-b-1 border-gray-400">
+                        <div className="flex flex-wrap p-5 gap-1 bg-gray-300 border-b-2 border-gray-400">
                             <div className="flex grow gap-2">
                                 <button className="default-button max-w-fit max-h-fit flex-none">
                                     <Tag weight="duotone" className="me-2" />
@@ -95,6 +103,8 @@ function SingleArticle() {
                 <CommentSection commentsVisible={commentsVisible} setCommentsVisible={setCommentsVisible} article={id} />
             </article>
         </>
+    ) : isLoadingArticle ? null : (
+        <NotFound objectType="Article"></NotFound>
     );
 }
 
