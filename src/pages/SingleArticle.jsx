@@ -1,11 +1,10 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getArticle } from "../api/api";
 import { getAltTag } from "../api/pexels";
 import VotingButtons from "../components/VotingButtons";
-import { UserCircle, Tag, Calendar } from "@phosphor-icons/react";
+import { Tag, Calendar } from "@phosphor-icons/react";
 import CommentSection from "../components/comments/CommentsSection";
-import { UserAccount } from "../components/contexts/UserAccount";
 import { getUser } from "../api/api";
 
 function SingleArticle() {
