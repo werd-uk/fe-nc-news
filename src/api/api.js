@@ -6,9 +6,11 @@ export const getArticles = (query) => {
     return ncApi
         .get("/articles", { params: query })
         .then((response) => {
-            return response.data;
+            return Promise.resolve(response.data);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+            return Promise.reject({ msg: err.message, status: err.status });
+        });
 };
 
 export const getArticle = (id) => {
@@ -17,7 +19,9 @@ export const getArticle = (id) => {
         .then((response) => {
             return response.data;
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+            return Promise.reject(err);
+        });
 };
 
 export const getComments = (article_id) => {
@@ -26,7 +30,9 @@ export const getComments = (article_id) => {
         .then((response) => {
             return response.data.comments;
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+            return Promise.reject(err);
+        });
 };
 
 export const patchVote = (object, id, number) => {
@@ -35,7 +41,9 @@ export const patchVote = (object, id, number) => {
         .then((response) => {
             return response.data;
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+            return Promise.reject(err);
+        });
 };
 
 export const postCommentOnArticle = (currentUser, article_id, content) => {
@@ -50,18 +58,44 @@ export const postCommentOnArticle = (currentUser, article_id, content) => {
 };
 
 export const deleteComment = (comment_id) => {
-    return ncApi.delete(`/comments/${comment_id}`).then((response) => {
-        return response.status;
-    });
+    return ncApi
+        .delete(`/comments/${comment_id}`)
+        .then((response) => {
+            return response.status;
+        })
+        .catch((err) => {
+            return Promise.reject(err);
+        });
 };
 
 export const getUsers = () => {
-    return ncApi.get("/users").then((response) => {
-        return response.data.users;
-    });
+    return ncApi
+        .get("/users")
+        .then((response) => {
+            return response.data.users;
+        })
+        .catch((err) => {
+            return Promise.reject(err);
+        });
 };
 export const getUser = (username) => {
-    return ncApi.get(`/users/${username}`).then((response) => {
-        return response;
-    });
+    return ncApi
+        .get(`/users/${username}`)
+        .then((response) => {
+            return response;
+        })
+        .catch((err) => {
+            return Promise.reject(err);
+        });
+};
+
+export const getTopics = () => {
+    return ncApi
+        .get(`/topics`)
+        .then((response) => {
+            return response;
+        })
+        .catch((err) => {
+            return Promise.reject(err);
+        });
 };
