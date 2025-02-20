@@ -25,3 +25,6 @@ dist-ssr
 
 #DOTENV Files
 .env*
+
+# Local Netlify folder
+.netlify

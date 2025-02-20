@@ -19,7 +19,7 @@ function VotingButtons({ type, initCount, id, votes, setVotes }) {
     }, []);
 
     return (
-        <div key={id} className="flex bg-gray-400 rounded-sm max-w-fit max-h-fit p-1 self-start">
+        <div key={id} className="flex border-1 border-black/20 bg-black/10 rounded-sm max-w-fit max-h-fit p-1">
             <span className="flex gap-2 px-2">
                 <button
                     aria-label={`down vote ${type} button`}
@@ -28,9 +28,9 @@ function VotingButtons({ type, initCount, id, votes, setVotes }) {
                     <Skull className="rotate-180" color="#bc0000" weight="duotone" size={23} />
                     <span className="hidden">{`Down vote ${type}`}</span>
                 </button>
-                <div className="max-h-fit rounded-sm">
+                <div className="h-7 w-9 rounded-sm bg-white/20 px-2 items-center">
                     {updatingVotes ? (
-                        <LoadingSpinner className="self-center" />
+                        <LoadingSpinner className="m-auto" />
                     ) : (
                         <div>
                             <p className="text-xl text-center" aria-label="number of votes">

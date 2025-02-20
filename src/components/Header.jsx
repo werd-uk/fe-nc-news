@@ -5,28 +5,20 @@ import UserPanel from "./users/UserPanel";
 function Header() {
     return (
         <>
-            <header className="flex p-2 col-span-full items-center bg-white rounded-md text-black py-2 px-6 mb-2 justify-between">
-                <div className="flex grow">
-                    <Link to="/">
-                        <h1 className=" text-nowrap text-xl sm:text-2xl">
-                            <span className="flex flex-nowrap ">
-                                <Skull className="sm:mt-[2px] me-1 sm:me-3" />
-                                <span className="text-nowrap sr-only lg:not-sr-only">Dread-it</span>
-                            </span>
-                        </h1>
-                    </Link>
-                </div>
-                <div className="flex gap-4 justify-between grow">
-                    <nav className="gap-3 items-center max-w-fit">
-                        <div className="flex border-1 border-gray-300 rounded-md p-2 gap-2 sm:text-sm">
-                            <h2>Topics:</h2>
-                            <Link to="/">/all</Link>
-                            <Link to="/topics/coding">/coding</Link>
-                            <Link to="/topics/cooking">/cooking</Link>
-                            <Link to="/topics/football">/football</Link>
-                        </div>
+            <header className="flex p-2 bg-white rounded-md text-black mb-2">
+                <div className="flex w-full justify-between items-center flex-col sm:flex-row gap-2">
+                    <div className="flex items-center text-2xl md:text-xl">
+                        <Skull className="mx-1 xs:m-2" />
+                        <span className="text-nowrap sr-only md:not-sr-only max-sm:not-sr-only">Dread-it</span>
+                    </div>
+                    <nav className="flex border-1 border-gray-300 rounded-md p-2 gap-2 xs:text-sm">
+                        <h2>Topics:</h2>
+                        <Link to="/">/all</Link>
+                        <Link to="/topics/coding">/coding</Link>
+                        <Link to="/topics/cooking">/cooking</Link>
+                        <Link to="/topics/football">/football</Link>
                     </nav>
-                    <UserPanel className="min-w-[20px]" />
+                    <UserPanel />
                 </div>
             </header>
         </>

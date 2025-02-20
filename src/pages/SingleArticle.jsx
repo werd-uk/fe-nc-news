@@ -54,7 +54,7 @@ function SingleArticle() {
 
     return !notFound && !isLoadingArticle ? (
         <>
-            <article className="max-w-[1000px] pt-5 ">
+            <article className="max-w-[1000px] pt-1 pb-1 shadow-xl">
                 <div className="grid bg-gray-200 grid-cols-4 w-full gap-2">
                     <div className="col-span-full">
                         <div className="flex flex-wrap p-5 gap-1 bg-gray-300 border-b-2 border-gray-400">
@@ -68,9 +68,21 @@ function SingleArticle() {
                                     <Calendar weight="duotone" className="me-2" />
                                     {new Date(currentArticle.created_at).toLocaleDateString("en-GB")}
                                 </button>
-                                <VotingButtons type="article" id={currentArticle.article_id} initCount={currentArticle.votes} setVotes={setArticleVotes} votes={articleVotes} />
                             </div>
-                            <div className="flex-none flex-col py-3 px-4 rounded-sm items-center gap-2 bg-gray-400 shadow-lg max-w-fit max-h-fit">
+                        </div>
+                    </div>
+                    <div className="flex flex-col p-5 col-span-full">
+                        <div className="flex flex-col gap-2">
+                            <div>
+                                <h2 className="xs:text-md md:text-3xl mb-2">{currentArticle.title}</h2>
+                                <div className="bg-gray-300 p-3 xs:p-2 rounded-sm max-w-fit">
+                                    <figure>
+                                        <img className="object-cover rounded-lg pb-2" src={currentArticle.article_img_url} alt={imageAltTag} />
+                                        <figcaption className="text-sm">{imageAltTag}</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                            <div className="flex-none flex-col py-2 px-3 rounded-sm items-center gap-2 max-w-fit">
                                 <div className="flex no-wrap items-center">
                                     <img className="me-4 rounded-full aspect-square max-h-10" src={`${articleAuthor.avatar_url}`} />
                                     <div className="flex flex-col">
@@ -79,21 +91,8 @@ function SingleArticle() {
                                     </div>
                                 </div>
                             </div>
+                            <VotingButtons type="article" id={currentArticle.article_id} initCount={currentArticle.votes} setVotes={setArticleVotes} votes={articleVotes} />
                         </div>
-                    </div>
-                    <div className="flex flex-col p-5 col-span-full">
-                        <div className="bg-gray-300 p-3 rounded-sm order-2 max-w-max">
-                            <figure>
-                                <img className="object-cover rounded-lg pb-2" src={currentArticle.article_img_url} alt={imageAltTag} />
-                                <figcaption className="text-md">{imageAltTag}</figcaption>
-                            </figure>
-                        </div>
-                        <div className="flex">
-                            <div>
-                                <h2 className="text-3xl">{currentArticle.title}</h2>
-                            </div>
-                        </div>
-
                         <div className="col-span-full max-w-max">
                             <article className="text-wrap px-2 pt-5">{currentArticle.body}</article>
                         </div>
