@@ -14,7 +14,9 @@ function CommentSection({ commentsVisible, setCommentsVisible, article }) {
                 .then((response) => {
                     setComments(response);
                 })
-                .catch((err) => console.log(response));
+                .catch((err) => {
+                    // handle error
+                });
             setIsLoadingComments(false);
         }
         return () => {};
