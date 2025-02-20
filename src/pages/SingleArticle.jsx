@@ -6,6 +6,7 @@ import VotingButtons from "../components/VotingButtons";
 import { UserCircle, Tag, Calendar } from "@phosphor-icons/react";
 import CommentSection from "../components/comments/CommentsSection";
 import { UserAccount } from "../components/contexts/UserAccount";
+import { getUser } from "../api/api";
 
 function SingleArticle() {
     const { id } = useParams();
@@ -14,7 +15,7 @@ function SingleArticle() {
     const [currentArticle, setCurrentArticle] = useState({});
     const [articleVotes, setArticleVotes] = useState(0);
     const [imageAltTag, setImageAltTag] = useState("");
-    const { loggedInUser } = useContext(UserAccount);
+    const [articleAuthor, setArticleAuthor] = useState({});
 
     useEffect(() => {
         getArticle(id)
@@ -22,18 +23,25 @@ function SingleArticle() {
                 setCurrentArticle(response);
                 setArticleVotes(response.votes);
 
-                return response.article_img_url;
+                return response;
             })
-            .then((imageUrl) => {
-                getAltTag(imageUrl)
+            .then((response) => {
+                getAltTag(response.article_img_url)
                     .then((response) => {
                         setImageAltTag(response.alt);
                     })
                     .catch(() => {
                         setImageAltTag("Unable to retrieve Alt Tag");
                     });
+                return response;
             })
-            .catch((err) => console.log(response));
+            .then((response) => {
+                getUser(response.author).then((response) => {
+                    setArticleAuthor(response.data.user);
+                });
+            })
+
+            .catch((err) => console.log(err));
     }, []);
 
     return (
@@ -42,19 +50,27 @@ function SingleArticle() {
                 <div className="grid bg-gray-200 grid-cols-4 w-full gap-2">
                     <div className="col-span-full">
                         <div className="flex flex-wrap p-5 gap-1 bg-gray-300 border-b-1 border-gray-400">
-                            <button className="default-button max-w-fit flex-none">
-                                <UserCircle className="me-2" />
-                                {currentArticle.author}
-                            </button>
-                            <button className="default-button max-w-fit flex-none">
-                                <Tag weight="duotone" className="me-2" />
-                                {currentArticle.topic}
-                            </button>
-                            <button className="default-button max-w-fit flex-none">
-                                <Calendar weight="duotone" className="me-2" />
-                                {new Date(currentArticle.created_at).toLocaleDateString("en-GB")}
-                            </button>
-                            <VotingButtons type="article" id={currentArticle.article_id} initCount={currentArticle.votes} setVotes={setArticleVotes} votes={articleVotes} />
+                            <div className="flex grow gap-2">
+                                <button className="default-button max-w-fit max-h-fit flex-none">
+                                    <Tag weight="duotone" className="me-2" />
+
+                                    {currentArticle.topic}
+                                </button>
+                                <button className="default-button max-w-fit max-h-fit flex-none">
+                                    <Calendar weight="duotone" className="me-2" />
+                                    {new Date(currentArticle.created_at).toLocaleDateString("en-GB")}
+                                </button>
+                                <VotingButtons type="article" id={currentArticle.article_id} initCount={currentArticle.votes} setVotes={setArticleVotes} votes={articleVotes} />
+                            </div>
+                            <div className="flex-none flex-col py-3 px-4 rounded-sm items-center gap-2 bg-gray-400 shadow-lg max-w-fit max-h-fit">
+                                <div className="flex no-wrap items-center">
+                                    <img className="me-4 rounded-full aspect-square max-h-10" src={`${articleAuthor.avatar_url}`} />
+                                    <div className="flex flex-col">
+                                        <p className="font-bold">{articleAuthor.name}</p>
+                                        <p>{currentArticle.author}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="flex flex-col p-5 col-span-full">
@@ -64,11 +80,13 @@ function SingleArticle() {
                                 <figcaption className="text-md">{imageAltTag}</figcaption>
                             </figure>
                         </div>
-                        <div className="order-1 col-span-full text-3xl pb-2">
-                            <h2>{currentArticle.title}</h2>
+                        <div className="flex">
+                            <div>
+                                <h2 className="text-3xl">{currentArticle.title}</h2>
+                            </div>
                         </div>
 
-                        <div className="order-3 col-span-full max-w-max">
+                        <div className="col-span-full max-w-max">
                             <article className="text-wrap px-2 pt-5">{currentArticle.body}</article>
                         </div>
                     </div>

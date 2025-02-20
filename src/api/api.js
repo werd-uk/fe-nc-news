@@ -60,3 +60,8 @@ export const getUsers = () => {
         return response.data.users;
     });
 };
+export const getUser = (username) => {
+    return ncApi.get(`/users/${username}`).then((response) => {
+        return response;
+    });
+};

@@ -6,7 +6,7 @@ import { getUsers } from "../../api/api";
 import { UserAccount } from "../contexts/UserAccount";
 
 export default function UserSelect() {
-    const { loggedInUser, setLoggedInUser } = useContext(UserAccount);
+    const { setLoggedInUser } = useContext(UserAccount);
     const [userList, setUserList] = useState([]);
     const [selectedUser, setSelectedUser] = useState({
         username: "tickle122",
