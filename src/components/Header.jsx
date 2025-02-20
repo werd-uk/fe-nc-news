@@ -6,14 +6,13 @@ function Header() {
     return (
         <>
             <header className="flex col-span-full items-center bg-white rounded-md text-black py-2 px-6 mb-2 justify-between">
-                <div></div>
                 <div>
                     <Link to="/">
-                        <h1 className="flex flex-nowrap text-3xl items-center">
-                            <span className="pe-1">
-                                <Skull />
+                        <h1 className="flex flex-nowrap text-xl sm:text-2xl md:text-3xl">
+                            <span className="flex flex-nowrap">
+                                <Skull className="mt-[2px] me-1" />
+                                Dread-it
                             </span>
-                            Dread-it
                         </h1>
                     </Link>
                 </div>

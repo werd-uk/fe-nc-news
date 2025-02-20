@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router";
 import { getArticle } from "../api/api";
 import { getAltTag } from "../api/pexels";
 import VotingButtons from "../components/VotingButtons";
+import { UserCircle, Tag, Calendar } from "@phosphor-icons/react";
 import CommentSection from "../components/comments/CommentsSection";
+import { UserAccount } from "../components/contexts/UserAccount";
 
 function SingleArticle() {
     const { id } = useParams();
@@ -12,6 +14,7 @@ function SingleArticle() {
     const [currentArticle, setCurrentArticle] = useState({});
     const [articleVotes, setArticleVotes] = useState(0);
     const [imageAltTag, setImageAltTag] = useState("");
+    const { loggedInUser } = useContext(UserAccount);
 
     useEffect(() => {
         getArticle(id)
@@ -35,28 +38,40 @@ function SingleArticle() {
 
     return (
         <>
-            <article>
-                <div className="grid grid-cols-4 w-full gap-2">
+            <article className="max-w-[1000px]">
+                <div className="grid bg-gray-200 grid-cols-4 w-full gap-2">
                     <div className="col-span-full">
-                        <div className="flex flex-nowrap pb-5 gap-1">
-                            <button className="default-button">{currentArticle.author}</button>
-                            <button className="default-button">{currentArticle.topic}</button>
-                            <button className="default-button">{new Date(currentArticle.created_at).toLocaleDateString("en-GB")}</button>
+                        <div className="flex flex-wrap p-5 gap-1 bg-gray-300 border-b-1 border-gray-400">
+                            <button className="default-button max-w-fit flex-none">
+                                <UserCircle className="me-2" />
+                                {currentArticle.author}
+                            </button>
+                            <button className="default-button max-w-fit flex-none">
+                                <Tag weight="duotone" className="me-2" />
+                                {currentArticle.topic}
+                            </button>
+                            <button className="default-button max-w-fit flex-none">
+                                <Calendar weight="duotone" className="me-2" />
+                                {new Date(currentArticle.created_at).toLocaleDateString("en-GB")}
+                            </button>
+                            <VotingButtons type="article" id={currentArticle.article_id} initCount={currentArticle.votes} setVotes={setArticleVotes} votes={articleVotes} />
                         </div>
                     </div>
-                    <div className="bg-gray-300 p-2 rounded-sm order-2 lg:col-span-1 md:col-span-2 col-span-full aspect-video">
-                        <figure>
-                            <img className="object-cover rounded-lg pb-2" src={currentArticle.article_img_url} alt={imageAltTag} />
-                            <figcaption className="text-sm">{imageAltTag}</figcaption>
-                        </figure>
+                    <div className="flex flex-col p-5 col-span-full">
+                        <div className="bg-gray-300 p-3 rounded-sm order-2 max-w-max">
+                            <figure>
+                                <img className="object-cover rounded-lg pb-2" src={currentArticle.article_img_url} alt={imageAltTag} />
+                                <figcaption className="text-md">{imageAltTag}</figcaption>
+                            </figure>
+                        </div>
+                        <div className="order-1 col-span-full text-3xl pb-2">
+                            <h2>{currentArticle.title}</h2>
+                        </div>
+
+                        <div className="order-3 col-span-full max-w-max">
+                            <article className="text-wrap px-2 pt-5">{currentArticle.body}</article>
+                        </div>
                     </div>
-                    <div className="order-1 col-span-full text-3xl">
-                        <h2>{currentArticle.title}</h2>
-                    </div>
-                    <div className="order-3 col-span-full sm:justify-self-end md:justify-self-start">
-                        <VotingButtons type="article" id={currentArticle.article_id} initCount={currentArticle.votes} setVotes={setArticleVotes} votes={articleVotes} />
-                    </div>
-                    <div className="order-4 col-span-full">{currentArticle.body}</div>
                 </div>
 
                 <CommentSection commentsVisible={commentsVisible} setCommentsVisible={setCommentsVisible} article={id} />

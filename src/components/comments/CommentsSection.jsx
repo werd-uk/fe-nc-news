@@ -24,13 +24,19 @@ function CommentSection({ commentsVisible, setCommentsVisible, article }) {
 
     return commentsVisible ? (
         <>
-            <button className="mt-5 default-button" onClick={() => setCommentsVisible(!commentsVisible)}>
-                Hide Comments
-            </button>
-            <div className="bg-gray-200 rounded-md m-2 px-4 pt-1">
-                <h2 className="my-5 text-xl">Comments</h2>
-                <NewComment comments={comments} setComments={setComments}></NewComment>
-                <CommentList comments={comments} isLoadingComments={isLoadingComments} />
+            <div className="ps-4">
+                <button className="mt-5 default-button" onClick={() => setCommentsVisible(!commentsVisible)}>
+                    Hide Comments
+                </button>
+            </div>
+            <div className="bg-gray-200 rounded-lg mt-5 pt-1">
+                <div className="border-b-1 border-gray-400 mb-2 bg-gray-300">
+                    <h2 className="text-xl p-4">Comments ({comments.length})</h2>
+                </div>
+                <div className="p-4">
+                    <NewComment comments={comments} setComments={setComments}></NewComment>
+                    <CommentList comments={comments} isLoadingComments={isLoadingComments} />
+                </div>
             </div>
         </>
     ) : (
