@@ -69,26 +69,26 @@ function NewComment({ comments, setComments }) {
                             setInputNotice({ visible: true, msg: `${err.response.status}: ${err.response.data.detail}` });
                         });
                 }}>
-                <div className="mb-4 ms-1 -me-1 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
-                    <div className="px-2 py-2 bg-white rounded-t-lg dark:bg-gray-800">
+                <div className="mb-4 ms-1 -me-1 border border-gray-200 rounded-lg bg-gray-50 ">
+                    <div className="px-2 py-2 bg-white rounded-t-lg ">
                         <label htmlFor="comment" className="sr-only">
                             Your comment
                         </label>
                         <textarea
                             id="comment"
                             rows="4"
-                            className="w-full px-1 pt-1 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+                            className="w-full px-1 pt-1 text-sm text-gray-900 bg-white border-0 focus:ring-0"
                             placeholder="Write a comment..."
                             value={tempCommentText}
                             onChange={validateInput}
                             required></textarea>
                     </div>
-                    <div className="flex items-center justify-end px-3 py-2 border-t dark:border-gray-600 border-gray-200 gap-2">
+                    <div className="flex items-center justify-end px-3 py-2 border-t border-gray-200 gap-2">
                         {inputNotice.visible ? <Notice message={inputNotice.msg} level={inputNotice.level} /> : null}
                         <button
                             type="submit"
                             disabled={!isCommentValid}
-                            className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800 disabled:bg-gray-200 disabled:text-gray-500">
+                            className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800 disabled:bg-gray-200 disabled:text-gray-500">
                             Post comment as {currentUser}
                             {newCommentLoading ? <LoadingSpinner /> : null}
                         </button>
