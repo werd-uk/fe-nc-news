@@ -34,7 +34,7 @@ function Topics() {
     return articleList.length > 0 && !isError ? (
         <div className="p-5">
             <div className="flex flex-nowrap gap-5 mb-5 items-center">
-                <h3>Sort articles:</h3>
+                <h3 className="text-sm">Sort articles:</h3>
                 <button
                     className={sort === "comment_count" ? "default-button current-sort-button" : "default-button"}
                     onClick={() => {
