@@ -4,6 +4,7 @@ import { getArticle } from "../api/api";
 import { getAltTag } from "../api/pexels";
 import VotingButtons from "../components/VotingButtons";
 import { Tag, Calendar } from "@phosphor-icons/react";
+import { NotFound } from "./errors/ErrorPages";
 import CommentSection from "../components/comments/CommentsSection";
 import { getUser } from "../api/api";
 
@@ -11,6 +12,7 @@ function SingleArticle() {
     const { id } = useParams();
 
     const [commentsVisible, setCommentsVisible] = useState(false);
+    const [notFound, setNotFound] = useState(false);
     const [currentArticle, setCurrentArticle] = useState({});
     const [articleVotes, setArticleVotes] = useState(0);
     const [imageAltTag, setImageAltTag] = useState("");
@@ -40,10 +42,14 @@ function SingleArticle() {
                 });
             })
 
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                if (err.status === 404) {
+                    setNotFound(true);
+                }
+            });
     }, []);
 
-    return (
+    return !notFound ? (
         <>
             <article className="max-w-[1000px]">
                 <div className="grid bg-gray-200 grid-cols-4 w-full gap-2">
@@ -94,6 +100,8 @@ function SingleArticle() {
                 <CommentSection commentsVisible={commentsVisible} setCommentsVisible={setCommentsVisible} article={id} />
             </article>
         </>
+    ) : (
+        <NotFound objectType="Article"></NotFound>
     );
 }
 
