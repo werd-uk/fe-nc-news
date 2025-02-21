@@ -11,6 +11,10 @@
     --breakpoint-2xl: 1280px;
 }
 
+body {
+    min-width: 320px !important;
+}
+
 :root {
     max-width: 100dvw;
 }

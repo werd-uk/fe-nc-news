@@ -1,5 +1,5 @@
 import ArticleGrid from "../components/ArticleGrid";
-import { NotFound } from "./errors/ErrorPages";
+import { NotFound, LoadingPanel } from "./utilities/UtilityPanels";
 import { getArticles, getTopics } from "../api/api";
 import { ArrowDown, ArrowUp } from "@phosphor-icons/react";
 import { useState, useEffect } from "react";
@@ -68,7 +68,7 @@ function Topics() {
     ) : !isLoading ? (
         <NotFound objectType={`(Topic "${topic_name}")`} />
     ) : (
-        <div className="p-5">Loading...</div>
+        <LoadingPanel />
     );
 }
 export default Topics;

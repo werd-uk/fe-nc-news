@@ -2,7 +2,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import Topics from "./pages/Topics";
 import SingleArticle from "./pages/SingleArticle";
-import { NotFound } from "./pages/errors/ErrorPages";
+import { NotFound } from "./pages/utilities/UtilityPanels";
 import { Routes, Route } from "react-router";
 
 function App() {
@@ -27,8 +27,10 @@ function App() {
                 </Routes>
             </main>
 
-            <footer className="flex flex-nowrap bg-white rounded-md text-black p-5 ">
-                Dread-it was bought to you by<a href="https://dev.werd.uk">https://dev.werd.uk/</a>
+            <footer className="flex flex-nowrap bg-white rounded-md text-black p-5">
+                <p>
+                    Dread-it was bought to you by <a href="https://dev.werd.uk">https://dev.werd.uk/</a>
+                </p>
             </footer>
         </div>
     );
