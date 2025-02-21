@@ -21,25 +21,25 @@ function Comment({ comment }) {
 
     return (
         <article className={commentHidden ? "fade-out" : "block"}>
-            <div className="bg-gray-500 w-full rounded-sm m-1 p-15 max-w-[1000px] bubble">
+            <div className="flex flex-col bg-gray-500 w-full rounded-sm m-1 gap-2 p-15 max-w-[1000px] bubble">
                 <div className="flex justify-between">
-                    <p className="font-bold">{comment.author} says:</p>
+                    <p className="font-bold text-right">{comment.author} says:</p>
+                </div>
+                <div className="ps-2">
+                    <p className="italic">"{comment.body}"</p>
+                </div>
+                <div className="flex flex-row items-center justify-between gap-3">
+                    <VotingButtons key={comment.comment_id} id={comment.comment_id} type="comment" initCount={comment.votes} votes={commentVoteCount} setVotes={setCommentVoteCount} />
                     {loggedInUser.username === comment.author ? (
                         <button
                             onClick={() => {
                                 setCommentHidden(true);
                             }}
-                            className="bg-white/20 rounded-md hover:bg-white/50"
+                            className="bg-white/20 rounded-md border-1 border-black/20 hover:border-black/30 hover:bg-white/50 w-fit self-end"
                             aria-label="delete button">
-                            <Trash size={18} className="m-1" />
+                            <Trash size={18} className="m-3 text-blue-800" />
                         </button>
                     ) : null}
-                </div>
-                <div className="ps-2">
-                    <p className="italic">"{comment.body}"</p>
-                </div>
-                <div>
-                    <VotingButtons key={comment.comment_id} id={comment.comment_id} type="comment" initCount={comment.votes} votes={commentVoteCount} setVotes={setCommentVoteCount} />
                 </div>
             </div>
         </article>
