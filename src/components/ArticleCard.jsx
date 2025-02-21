@@ -7,11 +7,15 @@ function ArticleCard({ article }) {
     const [imageAltTag, setImageAltTag] = useState("");
 
     useEffect(() => {
-        getAltTag(article.article_img_url)
-            .then((response) => {
-                setImageAltTag(response.alt);
-            })
-            .catch(() => setImageAltTag("Unable to retrieve Alt Tag"));
+        if (import.meta.env.VITE_PEXELS_API) {
+            getAltTag(article.article_img_url)
+                .then((response) => {
+                    setImageAltTag(response.alt);
+                })
+                .catch(() => setImageAltTag("Unable to retrieve Alt Tag"));
+        } else {
+            setImageAltTag("");
+        }
     });
 
     return (
