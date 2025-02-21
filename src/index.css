@@ -30,19 +30,16 @@
     text-transform: none;
     color: rgb(0, 63, 235);
     opacity: 1;
-    box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 3px 0 rgb(0, 0, 0, 0.1), 0 1px 2px -1px rgb(0, 0, 0, 0.1);
+    box-shadow: 0px 3px 3px 0px rgb(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.default-button:hover {
+    box-shadow: 0px 5px 3px 0px rgb(0, 0, 0, 0.3);
 }
 
 .default-button > svg {
     margin-left: 2px;
-}
-
-.topic-button {
-    color: red;
-}
-.current-topic-button {
-    background-color: red;
-    color: rgba(254, 254, 254, 1);
 }
 
 .current-sort-button {
@@ -51,32 +48,61 @@
 }
 
 .bubble {
+    z-index: 2;
     position: relative;
     height: auto;
     padding: 15px;
-    background: #7cc5fd;
+    background: #d8d8d8;
     -webkit-border-radius: 14px;
     -moz-border-radius: 14px;
-    border-radius: 14px;
+    border-radius: 20px;
+}
+
+.author-comment {
+    z-index: 2;
+    color: white;
+    background-color: #218aff;
 }
 
 .bubble:after {
     content: "";
     position: absolute;
-    border-style: solid;
-    border-width: 13px 20px 13px 0;
-    border-color: transparent #7cc5fd;
-    display: block;
-    width: 0;
     z-index: 1;
-    margin-top: -15px;
-    left: -15px;
-    top: 70%;
+    bottom: 0;
+    left: -10px;
+    width: 10px;
+    height: 20px;
+    background: white;
+    border-bottom-right-radius: 10px;
 }
+
+.bubble:before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+    left: -7px;
+    height: 20px;
+    width: 20px;
+    background: #d8d8d8;
+    border-bottom-right-radius: 15px;
+}
+
+.author-comment:after {
+    border-color: transparent #218aff;
+}
+.author-comment::before {
+    background: #218aff;
+}
+
 a {
     color: #1650bb;
     font-weight: 600;
 }
 a:hover {
     text-decoration: underline;
+}
+
+.card:hover {
+    text-decoration: none;
 }

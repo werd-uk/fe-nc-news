@@ -19,7 +19,7 @@ function ArticleCard({ article }) {
     });
 
     return (
-        <Link to={"/articles/" + article.article_id}>
+        <Link className="card" to={"/articles/" + article.article_id}>
             <div className="rounded-lg shadow-[0px_18px_15px_-14px_rgba(0,_0,_0,_0.3)] hover:shadow-[0px_29px_15px_-14px_rgba(0,_0,_0,_0.3)] p-2 border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <img className="w-full aspect-video object-cover rounded-lg" src={`${article.article_img_url}`} alt={imageAltTag} />
                 <div className="xs:p-1 p-2">

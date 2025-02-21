@@ -31,7 +31,7 @@ function CommentSection({ commentsVisible, setCommentsVisible, article }) {
                     Hide Comments
                 </button>
             </div>
-            <div className="bg-gray-300 rounded-lg mt-5 pt-1">
+            <div className="bg-white rounded-lg mt-5 pt-1">
                 <div className="border-b-1 border-gray-400 mb-2 bg-gray-300">
                     <h2 className="text-xl p-4">Comments ({comments.length})</h2>
                 </div>

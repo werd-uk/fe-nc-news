@@ -21,12 +21,12 @@ function Comment({ comment }) {
 
     return (
         <article className={commentHidden ? "fade-out" : "block"}>
-            <div className="flex flex-col bg-gray-500 w-full rounded-sm m-1 gap-2 p-15 max-w-[1000px] bubble">
-                <div className="flex justify-between">
-                    <p className="font-bold text-right">{comment.author} says:</p>
-                </div>
+            <div className="flex justify-between ms-5">
+                <p className="text-sm text-right">{comment.author} says:</p>
+            </div>
+            <div className={`flex flex-col w-full rounded-sm m-1 gap-2 p-15 max-w-[1000px] bubble shadow-md ${loggedInUser.username === comment.author ? "author-comment" : ""}`}>
                 <div className="ps-2">
-                    <p className="italic">"{comment.body}"</p>
+                    <p>{comment.body}</p>
                 </div>
                 <div className="flex flex-row items-center justify-between gap-3">
                     <VotingButtons key={comment.comment_id} id={comment.comment_id} type="comment" initCount={comment.votes} votes={commentVoteCount} setVotes={setCommentVoteCount} />

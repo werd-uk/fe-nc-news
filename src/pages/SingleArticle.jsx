@@ -82,7 +82,7 @@ function SingleArticle() {
                                     </figure>
                                 </div>
                             </div>
-                            <div className="flex-none flex-col py-2 px-3 rounded-sm items-center gap-2 max-w-fit">
+                            <div aria-label="article author details" className="flex-none flex-col py-2 px-3 rounded-sm items-center gap-2 max-w-fit">
                                 <div className="flex no-wrap items-center">
                                     <div className="flex bg-blue-500 rounded-full aspect-square place-items-center p-1">
                                         <img className="rounded-full aspect-square max-h-12 size-12" alt={`The avatar for the author ${articleAuthor.name}`} src={`${articleAuthor.avatar_url}`} />
