@@ -16,7 +16,10 @@ function App() {
                     <Route path="/articles">
                         <Route path=":id" element={<SingleArticle />} />
                     </Route>
-                    <Route path="/topics/:topic_name" element={<Topics />} />
+                    <Route path="/topics">
+                        <Route index element={<Home />} />
+                        <Route path=":topic_name" element={<Topics />} />
+                    </Route>
                     <Route path="/">
                         <Route index element={<Home />} />
                         <Route path="/*" element={<NotFound />} />
@@ -24,8 +27,8 @@ function App() {
                 </Routes>
             </main>
 
-            <footer className=" bg-white rounded-md text-black p-5 ">
-                Dread-it was bought to you by <a href="https://dev.werd.uk">https://dev.werd.uk/</a>
+            <footer className="flex flex-nowrap bg-white rounded-md text-black p-5 ">
+                Dread-it was bought to you by<a href="https://dev.werd.uk">https://dev.werd.uk/</a>
             </footer>
         </div>
     );
