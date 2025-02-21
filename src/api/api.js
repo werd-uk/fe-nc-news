@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ncApi = axios.create({ baseURL: "https://werd-nc-news.onrender.com/api", headers: { "Content-Type": "application/json" } });
+const ncApi = axios.create({ baseURL: "https://werd-nc-news.onrender.com/api", headers: { "Content-Type": "application/json" }, timeout: 30000 });
 
 export const getArticles = (query) => {
     return ncApi

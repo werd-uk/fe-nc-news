@@ -7,11 +7,11 @@ import { Routes, Route } from "react-router";
 
 function App() {
     return (
-        <div className="bg-white dark:bg-gray-500 p-3 h-fit">
+        <div className="flex flex-col bg-white dark:bg-gray-500 p-3 h-[100dvh] overflow-auto">
             <Routes>
                 <Route path="*" element={<Header />}></Route>
             </Routes>
-            <main className="bg-gray-300 rounded-md text-black justify-items-center mb-2">
+            <main className="grow bg-gray-300 rounded-md text-black justify-items-center mb-2 relative">
                 <Routes>
                     <Route path="/articles">
                         <Route path=":id" element={<SingleArticle />} />
