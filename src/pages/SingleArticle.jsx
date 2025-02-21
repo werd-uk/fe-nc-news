@@ -84,7 +84,7 @@ function SingleArticle() {
                             </div>
                             <div className="flex-none flex-col py-2 px-3 rounded-sm items-center gap-2 max-w-fit">
                                 <div className="flex no-wrap items-center">
-                                    <img className="me-4 rounded-full aspect-square max-h-10" src={`${articleAuthor.avatar_url}`} />
+                                    <img className="me-4 rounded-full aspect-square max-h-10" alt={`The avatar for the author ${articleAuthor.name}`} src={`${articleAuthor.avatar_url}`} />
                                     <div className="flex flex-col">
                                         <p className="font-bold">{articleAuthor.name}</p>
                                         <p>{currentArticle.author}</p>
