@@ -91,7 +91,9 @@ function SingleArticle() {
                                     </div>
                                 </div>
                             </div>
-                            <VotingButtons type="article" id={currentArticle.article_id} initCount={currentArticle.votes} setVotes={setArticleVotes} votes={articleVotes} />
+                            <div className="ps-2">
+                                <VotingButtons type="article" id={currentArticle.article_id} initCount={currentArticle.votes} setVotes={setArticleVotes} votes={articleVotes} />
+                            </div>
                         </div>
                         <div className="col-span-full max-w-max">
                             <article className="text-wrap px-2 pt-5">{currentArticle.body}</article>
