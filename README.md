@@ -53,4 +53,6 @@ VITE_PEXELS_API=<span style="color:#7ee787"><em>YOURAPIKEYGOESHERE</em></span>
 </code>
 </pre>
 
+---
+
 > This portfolio project was created as part of a Digital Skills Bootcamp in Software Engineering provided by [Northcoders](https://northcoders.com/)
